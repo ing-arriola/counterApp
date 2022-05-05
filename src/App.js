@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import BotonSumar from './BotonSumar';
+import MuestraCuenta from './MuestraCuenta';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      contador:0
+    }
+    this.aumentarContador = this.aumentarContador.bind(this);
+  }
+
+  aumentarContador() { 
+    this.setState({ contador: this.state.contador + 1})
+  } 
+
+  decrementarContador(){
+    if(this.state.contador > 0){
+      this.setState({
+        contador: this.state.contador - 1
+      })
+
+    }
+  }
+
+  render() {
+    return (
+      <>
+        <BotonSumar aumentarContador={this.aumentarContador}/>
+        <button onClick={()=>this.decrementarContador()} >Restar</button>
+        <MuestraCuenta valorMostrar={this.state.contador} />
+      </>
+    )
+  }
 }
-
-export default App;
